@@ -1,10 +1,75 @@
 #include <iostream>
 
-using namespace std;
+//using namespace std;
+
+/*
+
+   4
+	\
+     \
+	  +----- 1
+	 /|
+	/ |
+   3  2
+
+*/
+unsigned int get_greatest_product(unsigned short data[][20], unsigned short x_start, unsigned short y_start)
+{
+	short x_end, y_end, x_iter, y_iter;
+	unsigned int max_prod = 0, prod;
+
+	// #1
+	x_end = x_start + 3;
+	if (x_end < 20) {
+		prod = 1;
+		for (x_iter = x_start; x_iter <= x_end; x_iter++) {
+			prod *= data[y_start][x_iter];
+		}
+		max_prod = prod;
+	}
+
+	// #2
+	y_end = y_start + 3;
+	if (y_end < 20) {
+		prod = 1;
+		for (y_iter = y_start; y_iter <= y_end; y_iter++) {
+			prod *= data[y_iter][x_start];
+		}
+		if (prod > max_prod)
+			max_prod = prod;
+	}
+
+	// #3
+	x_end = x_start - 3;
+	y_end = y_start + 3;
+	if (x_end >= 0 && y_end < 20) {
+		prod = 1;
+		for (x_iter = x_start, y_iter = y_start; x_iter >= x_end && y_iter <= y_end; x_iter--, y_iter++) {
+			prod *= data[y_iter][x_iter];
+		}
+		if (prod > max_prod)
+			max_prod = prod;
+	}
+
+	// #4
+	x_end = x_start - 3;
+	y_end = y_start - 3;
+	if (x_end >= 0 && y_end >= 0) {
+		prod = 1;
+		for (x_iter = x_start, y_iter = y_start; x_iter >= x_end && y_iter >= y_end; x_iter--, y_iter--) {
+			prod *= data[y_iter][x_iter];
+		}
+		if (prod > max_prod)
+			max_prod = prod;
+	}
+
+	return max_prod;
+}
+
 
 int main(void)
 {
-	unsigned char data[][20] = {
+	unsigned short data[][20] = {
 {8, 2, 22, 97, 38, 15, 0, 40, 0, 75, 4, 5, 7, 78, 52, 12, 50, 77, 91, 8},
 {49, 49, 99, 40, 17, 81, 18, 57, 60, 87, 17, 40, 98, 43, 69, 48, 4, 56, 62, 0},
 {81, 49, 31, 73, 55, 79, 14, 29, 93, 71, 40, 67, 53, 88, 30, 3, 49, 13, 36, 65},
@@ -26,8 +91,22 @@ int main(void)
 {20, 73, 35, 29, 78, 31, 90, 1, 74, 31, 49, 71, 48, 86, 81, 16, 23, 57, 5, 54},
 {1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48}
 };
+	unsigned int prod = 0, p;
+	unsigned short x, y;
 
-	cout << "Length = " << sizeof(data)/sizeof(unsigned char) << endl;
+	for (y = 0; y < 20; y++) {
+		for (x = 0; x < 20; x++) {
+			p = get_greatest_product(data, x, y);
+			//std::cout << x << " " << y << std::endl;
+			if (p > prod)
+				prod = p;
+		}
+	}
+
+
+	std::cout << "Max Product = " << prod << std::endl;
+
+	//std::cout << "Length = " << sizeof(data)/sizeof(unsigned char) << std::endl;
 
 	return 0;
 }
