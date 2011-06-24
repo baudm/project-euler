@@ -11,7 +11,7 @@ bool is_prime(unsigned long num)
 	unsigned s = sqrt(num);
 	unsigned short i, j;
 
-	for (i = 0; primes[i] <= s; i++) {
+	for (i = 0; i < primes.size() && primes[i] <= s; i++) {
 		if (num % primes[i] == 0)
 			return false;
 	}
@@ -22,8 +22,8 @@ bool is_prime(unsigned long num)
 			return false;
 	}
 
-	// we don't need primes beyond 1423
-	if (num <= 1423)
+	// we don't need primes beyond 1414 (sqrt of 2M)
+	if (num <= 1414)
 		primes.push_back(num);
 
 	return true;
