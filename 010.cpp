@@ -33,9 +33,9 @@ bool is_prime(unsigned long num)
 int main(void)
 {
 	unsigned i;
-	long long sum = 0;
+	long long sum = 5; // 2 + 3
 
-	for (i = 2; i < 2000000; i++) {
+	for (i = 5; i < 2000000; i += (i % 6 == 5) ? 2 : 4) {
 		if (is_prime(i))
 			sum += i;
 	}

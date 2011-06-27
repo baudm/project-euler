@@ -8,8 +8,7 @@ using namespace std;
 
 bool is_prime(unsigned long num)
 {
-	unsigned i, s = sqrt(num);
-	unsigned long p;
+	unsigned p, s = sqrt(num);
 
 	if (2 <= s && num % 2 == 0)
 		return false;
@@ -17,8 +16,8 @@ bool is_prime(unsigned long num)
 	if (3 <= s && num % 3 == 0)
 		return false;
 
-	for (i = 1, p = 5; p <= s; i++, p = 6 * i - 1) {
-		if (num % p == 0 || num % (p + 2) == 0)
+	for (p = 5; p <= s; p += (p % 6 == 5) ? 2 : 4) {
+		if (num % p == 0)
 			return false;
 	}
 
@@ -75,13 +74,12 @@ int main(void)
 	vector<unsigned> circular_primes, buffer;
 	bool circ_prime;
 
-	for (num = 97; num < 1000000;) {
-		num += (num % 6 == 5) ? 2 : 4;
-		if (find(circular_primes.begin(), circular_primes.end(), num) != circular_primes.end())
-			continue;
+	for (num = 101; num < 1000000; num += (num % 6 == 5) ? 2 : 4) {
 		if (!can_be_circ_prime(num))
 			continue;
 		if (!is_prime(num))
+			continue;
+		if (find(circular_primes.begin(), circular_primes.end(), num) != circular_primes.end())
 			continue;
 		get_base_and_digits(num, &base, &digits);
 		rotation = num;
