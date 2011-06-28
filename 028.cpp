@@ -1,6 +1,5 @@
 #include <iostream>
 
-using namespace std;
 
 int main(void)
 {
@@ -17,7 +16,7 @@ int main(void)
 		diff += 2;
 	}
 
-	cout << sum << endl;
+	std::cout << sum << std::endl;
 
 	return 0;
 }

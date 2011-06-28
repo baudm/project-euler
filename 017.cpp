@@ -1,6 +1,5 @@
 #include <iostream>
 
-using namespace std;
 
 
 unsigned short get_base(unsigned n)
@@ -94,7 +93,7 @@ int main(void)
 		while (num) {
 			if (num < 10 || num > 19) {
 				digit = num / base;
-				//cout << "Digit: " << digit << ", num = " << num << ", base = " << base << endl;
+				//std::cout << "Digit: " << digit << ", num = " << num << ", base = " << base << std::endl;
 				count += get_letter_count(digit, base);
 				num %= base;
 			} else { // special case
@@ -107,7 +106,7 @@ int main(void)
 			count += 3; // 'and'
 	}
 
-	cout << count << endl;
+	std::cout << count << std::endl;
 
 	return 0;
 }

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cmath>
+#include <cstdint>
 
-using namespace std;
 
 bool is_prime(unsigned n)
 {
@@ -17,7 +17,7 @@ bool is_prime(unsigned n)
 
 int main(void)
 {
-	unsigned long n = 600851475143;
+	uint64_t n = 600851475143LL;
 	unsigned i, j, gpf = 1;
 
 	for (i = sqrt(n); i > 0; i--) {
@@ -33,7 +33,7 @@ int main(void)
 		}
 	}
 
-	cout << gpf << endl;
+	std::cout << gpf << std::endl;
 
 	return 0;
 }

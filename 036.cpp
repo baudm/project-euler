@@ -1,10 +1,9 @@
 #include <iostream>
 #include <string>
 
-using namespace std;
 
 
-void get_digits(unsigned long num, unsigned short base, string& digits)
+void get_digits(unsigned long num, unsigned short base, std::string& digits)
 {
 	char digit;
 
@@ -17,7 +16,7 @@ void get_digits(unsigned long num, unsigned short base, string& digits)
 }
 
 
-bool is_palindrome(string const& str)
+bool is_palindrome(std::string const& str)
 {
 	unsigned short i, s = str.size();
 
@@ -33,7 +32,7 @@ bool is_palindrome(string const& str)
 int main(void)
 {
 	unsigned long num, sum = 0;
-	string digits;
+	std::string digits;
 
 	for (num = 1; num < 1000000; num++) {
 		get_digits(num, 10, digits);
@@ -45,7 +44,7 @@ int main(void)
 			sum += num;
 	}
 
-	cout << sum << endl;
+	std::cout << sum << std::endl;
 
 	return 0;
 }

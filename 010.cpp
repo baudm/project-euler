@@ -2,12 +2,11 @@
 #include <vector>
 #include <cmath>
 
-using namespace std;
 
 bool is_prime(unsigned long num)
 {
 	// initially contains the first prime number, 2
-	static vector<unsigned> primes(1, 2);
+	static std::vector<unsigned> primes(1, 2);
 	unsigned s = sqrt(num);
 	unsigned short i, j;
 
@@ -33,14 +32,14 @@ bool is_prime(unsigned long num)
 int main(void)
 {
 	unsigned i;
-	long long sum = 5; // 2 + 3
+	unsigned long long sum = 5; // 2 + 3
 
 	for (i = 5; i < 2000000; i += (i % 6 == 5) ? 2 : 4) {
 		if (is_prime(i))
 			sum += i;
 	}
 
-	cout << "Sum = " << sum << endl;
+	std::cout << sum << std::endl;
 
 	return 0;
 }

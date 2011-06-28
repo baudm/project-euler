@@ -4,12 +4,10 @@
 #include <vector>
 #include <cmath>
 
-using namespace std;
 
-
-void parse(vector<string>& names, ifstream& file)
+void parse(std::vector<std::string>& names, std::ifstream& file)
 {
-	string name;
+	std::string name;
 	char c;
 	bool save = false;
 
@@ -34,7 +32,7 @@ void parse(vector<string>& names, ifstream& file)
 }
 
 
-unsigned short get_word_value(string& name)
+unsigned short get_word_value(std::string& name)
 {
 	unsigned short value = 0;
 	unsigned short i, size = name.size();
@@ -59,12 +57,12 @@ bool is_triangle(unsigned num)
 int main(void)
 {
 	unsigned i, triangles = 0;
-	ifstream file;
-	vector<string> words;
+	std::ifstream file;
+	std::vector<std::string> words;
 
 	file.open("words.txt");
 	if (!file.is_open()) {
-		cout << "Error opening file" << endl;
+		std::cout << "Error opening file" << std::endl;
 		return -1;
 	}
 
@@ -76,7 +74,7 @@ int main(void)
 			triangles++;
 	}
 
-	cout << triangles << endl;
+	std::cout << triangles << std::endl;
 
 	return 0;
 }

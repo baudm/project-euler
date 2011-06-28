@@ -104,7 +104,7 @@ int main(void)
 	}
 
 
-	std::cout << "Max Product = " << prod << std::endl;
+	std::cout << prod << std::endl;
 
 	//std::cout << "Length = " << sizeof(data)/sizeof(unsigned char) << std::endl;
 

@@ -2,7 +2,6 @@
 #include <cmath>
 #include <vector>
 
-using namespace std;
 
 
 bool is_abundant(unsigned num)
@@ -24,7 +23,7 @@ bool is_abundant(unsigned num)
 bool is_sum_of_2_abundant(unsigned num)
 {
 	// initial element is the smallest abundant number
-	static vector<unsigned> abundant(1, 12);
+	static std::vector<unsigned> abundant(1, 12);
 	unsigned last;
 	unsigned short i;
 
@@ -55,7 +54,7 @@ int main(void)
 			sum += i;
 	}
 
-	cout << sum << endl;
+	std::cout << sum << std::endl;
 
 	return 0;
 }

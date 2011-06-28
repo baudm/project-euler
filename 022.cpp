@@ -4,12 +4,10 @@
 #include <string>
 #include <algorithm>
 
-using namespace std;
 
-
-void parse(vector<string>& names, ifstream& file)
+void parse(std::vector<std::string>& names, std::ifstream& file)
 {
-	string name;
+	std::string name;
 	char c;
 	bool save = false;
 
@@ -34,7 +32,7 @@ void parse(vector<string>& names, ifstream& file)
 }
 
 
-unsigned short get_value(string& name)
+unsigned short get_value(std::string& name)
 {
 	unsigned short value = 0;
 	unsigned short i, size = name.size();
@@ -49,14 +47,14 @@ unsigned short get_value(string& name)
 
 int main(void)
 {
-	vector<string> names;
-	ifstream file;
+	std::vector<std::string> names;
+	std::ifstream file;
 	unsigned i, size;
 	unsigned long total = 0;
 
 	file.open("names.txt");
 	if (!file.is_open()) {
-		cout << "Error opening file" << endl;
+		std::cout << "Error opening file" << std::endl;
 		return -1;
 	}
 
@@ -69,7 +67,7 @@ int main(void)
 	for (i = 0; i < size; i++)
 		total += ((i + 1) * get_value(names[i]));
 
-	cout << total << endl;
+	std::cout << total << std::endl;
 
 	return 0;
 }

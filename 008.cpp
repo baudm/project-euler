@@ -1,7 +1,6 @@
 #include <iostream>
 #include <cstring>
 
-using namespace std;
 
 int main(void)
 {
@@ -20,7 +19,7 @@ int main(void)
 		e++;
 	}
 
-	cout << max_prod << endl;
+	std::cout << max_prod << std::endl;
 
 	return 0;
 }

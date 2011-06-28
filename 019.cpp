@@ -1,6 +1,5 @@
 #include <iostream>
 
-using namespace std;
 
 
 enum days_t {
@@ -64,7 +63,7 @@ int main(void)
 		}
 	}
 
-	cout << sundays << endl;
+	std::cout << sundays << std::endl;
 
 	return 0;
 }

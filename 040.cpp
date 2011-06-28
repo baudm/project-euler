@@ -1,6 +1,5 @@
 #include <iostream>
 
-using namespace std;
 
 
 unsigned get_base(unsigned num)
@@ -40,7 +39,7 @@ int main(void)
 			break;
 	}
 
-	cout << prod << endl;
+	std::cout << prod << std::endl;
 
 	return 0;
 }

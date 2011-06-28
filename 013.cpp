@@ -2,10 +2,9 @@
 #include <string>
 #include <algorithm>
 
-using namespace std;
 
 
-static string data[] = {
+static std::string data[] = {
 "37107287533902102798797998220837590246510135740250",
 "46376937677490009712648124896970078050417018260538",
 "74324986199524741059474233309513058123726617309629",
@@ -114,7 +113,7 @@ int main(void)
 	unsigned partial_sum = 0;
 	short num_i, digit_i;
 	char digit;
-	string sum;
+	std::string sum;
 
 	for (digit_i = data[0].length() - 1; digit_i >= 0; digit_i--) {
 		for (num_i = 0; num_i < 100; num_i++) {
@@ -131,7 +130,7 @@ int main(void)
 		sum.push_back(digit);
 	}
 	reverse(sum.begin(), sum.end());
-	cout << sum.substr(0, 10) << endl;
+	std::cout << sum.substr(0, 10) << std::endl;
 
 	return 0;
 }

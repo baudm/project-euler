@@ -1,6 +1,5 @@
 #include <iostream>
 
-using namespace std;
 
 
 unsigned f(unsigned n)
@@ -19,7 +18,7 @@ int main(void)
 		n += 3;
 	}
 
-	cout << "Sum = " << sum << endl;
+	std::cout << sum << std::endl;
 
 	return 0;
 }

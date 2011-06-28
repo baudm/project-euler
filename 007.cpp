@@ -1,7 +1,6 @@
 #include <iostream>
 #include <cmath>
 
-using namespace std;
 
 bool is_prime(unsigned n)
 {
@@ -28,7 +27,7 @@ int main(void)
 			i++;
 	}
 
-	cout << p << endl;
+	std::cout << p << std::endl;
 
 	return 0;
 }

@@ -1,6 +1,5 @@
 #include <iostream>
 
-using namespace std;
 
 
 unsigned reverse_int(unsigned n)
@@ -33,7 +32,7 @@ int main(void)
 		}
 	}
 
-	cout << "A = " << a << ", B = " << b << ";" << p << endl;
+	std::cout << p << std::endl;
 
 	return 0;
 }

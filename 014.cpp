@@ -1,6 +1,5 @@
 #include <iostream>
 
-using namespace std;
 
 
 unsigned long f(unsigned long n)
@@ -18,18 +17,18 @@ int main(void)
 		np = n;
 		ctr = 0;
 		do {
-			//cout << np << endl;
+			//std::cout << np << std::endl;
 			np = f(np);
 			ctr++;
 		} while (np != 1);
-		//cout << ctr << endl;
+		//std::cout << ctr << std::endl;
 		if (ctr > max_ctr) {
 			max = n;
 			max_ctr = ctr;
 		}
 	}
 
-	cout << max << endl;
+	std::cout << max << std::endl;
 
 	return 0;
 }

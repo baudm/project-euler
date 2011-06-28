@@ -1,6 +1,5 @@
 #include <iostream>
 
-using namespace std;
 
 int main(void)
 {
@@ -13,7 +12,7 @@ int main(void)
 	for (i = 1; i <= 100; i++)
 		sum += i;
 
-	cout << (sum * sum) - sum_of_squares << endl;
+	std::cout << (sum * sum) - sum_of_squares << std::endl;
 
 	return 0;
 }

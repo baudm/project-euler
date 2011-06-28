@@ -1,7 +1,5 @@
 #include <iostream>
 
-using namespace std;
-
 
 bool check(unsigned long num, unsigned short* digits)
 {
@@ -52,7 +50,7 @@ int main(void)
 	 */
 	} while (num_digits(digits * digit_max) >= digits);
 
-	cout << sum << endl;
+	std::cout << sum << std::endl;
 
 	return 0;
 }

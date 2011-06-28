@@ -1,7 +1,6 @@
 #include <iostream>
 #include <algorithm>
 
-using namespace std;
 
 int main(void)
 {
@@ -9,11 +8,11 @@ int main(void)
 	unsigned long i;
 
 	for (i = 1; i < 1000000; i++)
-		next_permutation(digits, digits + 10);
+		std::next_permutation(digits, digits + 10);
 
 	for (i = 0; i < 10; i++)
-		cout << digits[i];
-	cout << endl;
+		std::cout << digits[i];
+	std::cout << std::endl;
 
 	return 0;
 }

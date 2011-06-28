@@ -1,8 +1,7 @@
 #include <iostream>
 
-using namespace std;
 
-int gcf(int a, int b)
+unsigned long gcf(unsigned long a, unsigned long b)
 {
 	while (a && b) {
 		if (a > b)
@@ -13,21 +12,19 @@ int gcf(int a, int b)
 	return (a) ? a : b;
 }
 
-unsigned long int lcm(int a, int b)
+unsigned long lcm(unsigned long a, unsigned long b)
 {
-	return long(a) * b / gcf(a, b);
+	return a * (b / gcf(a, b));
 }
 
 int main(void)
 {
-	unsigned long int i, l = 1;
+	unsigned long i, l = 1;
 
-	for (i = 2; i <= 20; i++) {
+	for (i = 2; i <= 20; i++)
 		l = lcm(l, i);
-		cout << "i = " << i << ", l = " << l << endl;
-	}
 
-
+	std::cout << l << std::endl;
 
 	return 0;
 }

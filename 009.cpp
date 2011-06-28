@@ -1,6 +1,5 @@
 #include <iostream>
 
-using namespace std;
 
 bool is_triplet(unsigned short a, unsigned short b, unsigned short c)
 {
@@ -26,8 +25,8 @@ int main(void)
 		}
 	}
 
-	cout << "a = " << a << ", b = " << b << ", c = " << c << endl;
-	cout << a * b * c << endl;
+	//std::cout << "a = " << a << ", b = " << b << ", c = " << c << std::endl;
+	std::cout << a * b * c << std::endl;
 
 	return 0;
 }

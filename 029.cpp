@@ -2,12 +2,11 @@
 #include <vector>
 #include <cmath>
 
-using namespace std;
 
 /**
  * Returns the factors of num (excluding 1 and num itself)
  */
-void get_factors(unsigned short num, vector<unsigned short>& factors)
+void get_factors(unsigned short num, std::vector<unsigned short>& factors)
 {
 	unsigned short i, s = sqrt(num);
 
@@ -51,8 +50,8 @@ int main(void)
 	unsigned short a, b;
 	unsigned short base, exp;
 	unsigned terms;
-	vector<unsigned short> exp_factors;
-	vector<unsigned short>::iterator it;
+	std::vector<unsigned short> exp_factors;
+	std::vector<unsigned short>::iterator it;
 
 	terms = (max_a - min_a + 1) * (max_b - min_b + 1);
 	for (a = min_a; a <= max_a; a++) {
@@ -74,7 +73,7 @@ int main(void)
 		}
 	}
 
-	cout << terms << endl;
+	std::cout << terms << std::endl;
 
 	return 0;
 }

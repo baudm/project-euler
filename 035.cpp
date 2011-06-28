@@ -3,7 +3,6 @@
 #include <vector>
 #include <algorithm>
 
-using namespace std;
 
 
 bool is_prime(unsigned long num)
@@ -71,7 +70,7 @@ int main(void)
 {
 	unsigned num, rotation, base;
 	unsigned short digits, i;
-	vector<unsigned> circular_primes, buffer;
+	std::vector<unsigned> circular_primes, buffer;
 	bool circ_prime;
 
 	for (num = 101; num < 1000000; num += (num % 6 == 5) ? 2 : 4) {
@@ -100,7 +99,7 @@ int main(void)
 			circular_primes.push_back(buffer[i]);
 	}
 
-	cout << circular_primes.size() + 13 << endl;
+	std::cout << circular_primes.size() + 13 << std::endl;
 
 	return 0;
 }

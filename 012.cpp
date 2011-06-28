@@ -1,7 +1,6 @@
 #include <iostream>
 #include <cmath>
 
-using namespace std;
 
 unsigned long tri(unsigned n)
 {
@@ -56,7 +55,7 @@ int main(void)
 			break;
 	}
 
-	cout << num << endl;
+	std::cout << num << std::endl;
 
 	return 0;
 }

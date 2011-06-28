@@ -1,6 +1,5 @@
 #include <iostream>
 
-using namespace std;
 
 int main(void)
 {
@@ -11,7 +10,7 @@ int main(void)
 			sum += i;
 	}
 
-	cout << "Sum = " << sum << endl;
+	std::cout << sum << std::endl;
 
 	return 0;
 }
