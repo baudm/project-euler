@@ -1,4 +1,5 @@
 #include <iostream>
+#include "euler.hpp"
 
 
 bool check(unsigned long num, unsigned short* digits)
@@ -19,7 +20,7 @@ bool check(unsigned long num, unsigned short* digits)
 }
 
 
-unsigned short num_digits(unsigned long num)
+unsigned short euler::digit_count(unsigned long num)
 {
 	unsigned short digits = 0;
 
@@ -48,7 +49,7 @@ int main(void)
 	 * Repeat until the number of digits overtakes the number of digits of the
 	 * maximum possible digit sum
 	 */
-	} while (num_digits(digits * digit_max) >= digits);
+	} while (euler::digit_count(digits * digit_max) >= digits);
 
 	std::cout << sum << std::endl;
 
