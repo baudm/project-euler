@@ -1,27 +1,7 @@
 #include <iostream>
-#include <cmath>
 #include <vector>
 #include <algorithm>
-
-
-
-bool is_prime(unsigned long num)
-{
-	unsigned p, s = sqrt(num);
-
-	if (2 <= s && num % 2 == 0)
-		return false;
-
-	if (3 <= s && num % 3 == 0)
-		return false;
-
-	for (p = 5; p <= s; p += (p % 6 == 5) ? 2 : 4) {
-		if (num % p == 0)
-			return false;
-	}
-
-	return true;
-}
+#include "euler.hpp"
 
 
 void get_base_and_digits(unsigned long num, unsigned* base, unsigned short* digits)
@@ -76,7 +56,7 @@ int main(void)
 	for (num = 101; num < 1000000; num += (num % 6 == 5) ? 2 : 4) {
 		if (!can_be_circ_prime(num))
 			continue;
-		if (!is_prime(num))
+		if (!euler::is_prime(num))
 			continue;
 		if (find(circular_primes.begin(), circular_primes.end(), num) != circular_primes.end())
 			continue;
@@ -86,7 +66,7 @@ int main(void)
 		buffer.clear();
 		for (i = 1; i < digits; i++) {
 			rotation = next_rotation(rotation, base);
-			if (!is_prime(rotation)) {
+			if (!euler::is_prime(rotation)) {
 				circ_prime = false;
 				break;
 			}
