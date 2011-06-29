@@ -1,3 +1,5 @@
+#include <cmath>
+
 namespace euler
 {
 	// Reference: http://oeis.org/A000045
@@ -19,5 +21,25 @@ namespace euler
 		return curr;
 	}
 
-	extern bool is_prime(uint64_t num);
+	template <typename T>
+	bool is_prime(T const& num)
+	{
+		T s = sqrt(num);
+
+		if (num % 2 == 0 && 2 <= s)
+			return false;
+
+		if (num % 3 == 0 && 3 <= s)
+			return false;
+
+		T k, p = 5;
+
+		for (k = 1; p <= s; k++) {
+			p = 6 * k - 1;
+			if (num % p == 0 || num % (p + 2) == 0)
+				return false;
+		}
+
+		return true;
+	}
 }
