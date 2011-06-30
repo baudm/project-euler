@@ -1,4 +1,94 @@
+#include <cmath>
+#include <cstdint>
+
 namespace euler
 {
-	bool is_prime(uint64_t num);
+	// Reference: http://oeis.org/A000045
+	template<typename T, typename U>
+	T fib(U n)
+	{
+		if (n == 0)
+			return 0;
+
+		T tmp, prev = 0, curr = 1;
+
+		while (n > 1) {
+			tmp = curr;
+			curr += prev;
+			prev = tmp;
+			n--;
+		}
+
+		return curr;
+	}
+
+	template<typename T>
+	bool is_prime(T const& num)
+	{
+		T s = sqrt(num);
+
+		if (num % 2 == 0 && 2 <= s)
+			return false;
+
+		if (num % 3 == 0 && 3 <= s)
+			return false;
+
+		T k, p = 5;
+
+		for (k = 1; p <= s; k++) {
+			p = 6 * k - 1;
+			if (num % p == 0 || num % (p + 2) == 0)
+				return false;
+		}
+
+		return true;
+	}
+
+	template<typename T=uint8_t, typename U>
+	T digit_count(U num)
+	{
+		T digits = 0;
+
+		while (num) {
+			digits++;
+			num /= 10;
+		}
+
+		return digits;
+	}
+
+	template<typename T>
+	T reverse_int(T num, uint8_t base)
+	{
+		T rev = 0;
+		uint8_t digit;
+
+		while (num) {
+			digit = num % base;
+			num /= base;
+			rev = rev * base + digit;
+		}
+
+		return rev;
+	}
+
+	template<typename T>
+	bool is_palindrome_int(T num, uint8_t base)
+	{
+		return num == reverse_int(num, base);
+	}
+
+	template<typename Iterator>
+	bool is_palindrome_seq(Iterator start, Iterator end)
+	{
+		--end;
+		while (start < end) {
+			if (*start != *end)
+				return false;
+			++start;
+			--end;
+		}
+
+		return true;
+	}
 }

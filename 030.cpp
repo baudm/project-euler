@@ -1,4 +1,5 @@
 #include <iostream>
+#include "euler.hpp"
 
 
 bool check(unsigned long num)
@@ -40,14 +41,14 @@ int main(void)
 		if (check(num))
 			sum += num;
 
-		digits = num_digits(num);
+		digits = euler::digit_count(num);
 		num++;
 
 	/**
 	 * Repeat until the number of digits overtakes the number of digits of the
 	 * maximum possible digit sum
 	 */
-	} while (num_digits(digits * digit_max) >= digits);
+	} while (euler::digit_count(digits * digit_max) >= digits);
 
 	std::cout << sum << std::endl;
 

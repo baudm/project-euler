@@ -1,20 +1,16 @@
 #include <iostream>
-
-
-
-unsigned f(unsigned n)
-{
-	return (n > 1) ? f(n - 1) + f(n - 2) : 1;
-}
+#include <cstdint>
+#include "euler.hpp"
 
 
 int main(void)
 {
-	unsigned n = 2, fn = 0, sum = 0;
+	uint32_t fn = 0, sum = 0;
+	uint8_t n = 3;
 
 	while (fn < 4000000) {
 		sum += fn;
-		fn = f(n);
+		fn = euler::fib<uint32_t>(n);
 		n += 3;
 	}
 
