@@ -27,18 +27,15 @@ namespace euler
 	{
 		T s = sqrt(num);
 
-		if (num % 2 == 0 && 2 <= s)
+		if (num == 1 || (num % 2 == 0 && 2 <= s) || (num % 3 == 0 && 3 <= s))
 			return false;
 
-		if (num % 3 == 0 && 3 <= s)
-			return false;
-
-		T p;
 		/**
 		 * All primes are of the form 6k +/- 1
 		 * Thus, only integers of this form, up to sqrt(num),
 		 * are needed for the primality test.
 		 */
+		T p;
 		for (p = 5; p <= s; p += 6) {
 			if (num % p == 0 || num % (p + 2) == 0)
 				return false;
@@ -93,5 +90,24 @@ namespace euler
 		}
 
 		return true;
+	}
+
+	template<typename T, typename U>
+	T factorial(U n)
+	{
+		T fac = n;
+
+		while (n > 1) {
+			n--;
+			fac *= n;
+		}
+
+		return fac;
+	}
+
+	template<typename T, typename U>
+	inline T combination(U n, U r)
+	{
+		return factorial<T>(n) / (factorial<T>(r) * factorial<T>(n - r));
 	}
 }
