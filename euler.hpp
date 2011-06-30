@@ -110,4 +110,22 @@ namespace euler
 	{
 		return factorial<T>(n) / (factorial<T>(r) * factorial<T>(n - r));
 	}
+
+	template<typename T>
+	T gcf(T a, T b)
+	{
+		while (a && b) {
+			if (a > b)
+				a %= b;
+			else
+				b %= a;
+		}
+		return (a) ? a : b;
+	}
+
+	template<typename T>
+	T lcm(T a, T b)
+	{
+		return a * (b / gcf<T>(a, b));
+	}
 }
