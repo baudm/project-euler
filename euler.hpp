@@ -33,10 +33,13 @@ namespace euler
 		if (num % 3 == 0 && 3 <= s)
 			return false;
 
-		T k, p = 5;
-
-		for (k = 1; p <= s; k++) {
-			p = 6 * k - 1;
+		T p;
+		/**
+		 * All primes are of the form 6k +/- 1
+		 * Thus, only integers of this form, up to sqrt(num),
+		 * are needed for the primality test.
+		 */
+		for (p = 5; p <= s; p += 6) {
 			if (num % p == 0 || num % (p + 2) == 0)
 				return false;
 		}
