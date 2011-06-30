@@ -20,19 +20,6 @@ bool check(unsigned long num, unsigned short* digits)
 }
 
 
-unsigned short euler::digit_count(unsigned long num)
-{
-	unsigned short digits = 0;
-
-	while (num) {
-		digits++;
-		num /= 10;
-	}
-
-	return digits;
-}
-
-
 int main(void)
 {
 	unsigned long long num, sum = 0;
