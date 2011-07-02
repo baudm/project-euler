@@ -128,4 +128,21 @@ namespace euler
 	{
 		return a * (b / gcf<T>(a, b));
 	}
+
+	/**
+	 * order of a mod n
+	 */
+	template<typename T, typename U>
+	U order(T a, U n)
+	{
+		U k = 1;
+		U rem = a % n;
+
+		while (rem != 1) {
+			rem = (a * rem) % n;
+			k++;
+		}
+
+		return k;
+	}
 }
