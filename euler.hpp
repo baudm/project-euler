@@ -75,7 +75,7 @@ namespace euler
 	}
 
 	template<typename T>
-	bool is_palindrome_int(T num, uint8_t base)
+	inline bool is_palindrome_int(T num, uint8_t base)
 	{
 		return num == reverse_int(num, base);
 	}
@@ -126,7 +126,7 @@ namespace euler
 	}
 
 	template<typename T>
-	T lcm(T a, T b)
+	inline T lcm(T a, T b)
 	{
 		return a * (b / gcf<T>(a, b));
 	}
