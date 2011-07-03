@@ -25,13 +25,15 @@ namespace euler
 	template<typename T>
 	bool is_prime(T const& num)
 	{
-		T s = sqrt(num);
+		if (num == 1)
+			return false;
 
-		if (num == 1 || (num % 2 == 0 && 2 <= s) || (num % 3 == 0 && 3 <= s))
+		T s = sqrt(num);
+		if ((num % 2 == 0 && 2 <= s) || (num % 3 == 0 && 3 <= s))
 			return false;
 
 		/**
-		 * All primes are of the form 6k +/- 1
+		 * All primes, except 2 and 3, are of the form 6k +/- 1
 		 * Thus, only integers of this form, up to sqrt(num),
 		 * are needed for the primality test.
 		 */
