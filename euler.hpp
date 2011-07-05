@@ -59,11 +59,11 @@ namespace euler
 		return digits;
 	}
 
-	template<typename T>
-	T reverse_int(T num, uint8_t base)
+	template<typename T, typename U>
+	T reverse_int(T num, U base)
 	{
 		T rev = 0;
-		uint8_t digit;
+		U digit;
 
 		while (num) {
 			digit = num % base;
@@ -74,8 +74,8 @@ namespace euler
 		return rev;
 	}
 
-	template<typename T>
-	inline bool is_palindrome_int(T num, uint8_t base)
+	template<typename T, typename U>
+	inline bool is_palindrome_int(T num, U base)
 	{
 		return num == reverse_int(num, base);
 	}
