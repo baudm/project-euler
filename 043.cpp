@@ -1,19 +1,7 @@
 #include <iostream>
 #include <cstdint>
 #include <algorithm>
-
-
-uint32_t get_value(uint8_t* start, uint8_t* end)
-{
-	uint32_t value = 0;
-
-	while (start != end) {
-		value = 10 * value + *start;
-		start++;
-	}
-
-	return value;
-}
+#include "euler.hpp"
 
 
 int main(void)
@@ -28,14 +16,14 @@ int main(void)
 		interesting = true;
 
 		for (i = 0; i < 7; i++) {
-			if (get_value(number + i + 1, number + i + 4) % primes[i] != 0) {
+			if (euler::digits2int<uint16_t>(10, number + i + 1, number + i + 4) % primes[i] != 0) {
 				interesting = false;
 				break;
 			}
 		}
 
 		if (interesting)
-			sum += get_value(number, number + 10);
+			sum += euler::digits2int<uint64_t>(10, number, number + 10);
 
 	} while (std::next_permutation(number, number + 10));
 
