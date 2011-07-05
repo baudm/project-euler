@@ -147,4 +147,15 @@ namespace euler
 
 		return k;
 	}
+
+	template<typename T, typename U, typename Iterator>
+	T digits2int(U base, Iterator start, Iterator end)
+	{
+		T value = *start++;
+
+		while (start != end)
+			value = base * value + *start++;
+
+		return value;
+	}
 }
