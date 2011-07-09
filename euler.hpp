@@ -84,7 +84,7 @@ namespace euler
 	bool is_palindrome_seq(Iterator start, Iterator end)
 	{
 		--end;
-		while (start < end) {
+		while (start != end) {
 			if (*start != *end)
 				return false;
 			++start;
