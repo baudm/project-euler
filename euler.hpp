@@ -99,6 +99,9 @@ namespace euler
 	template<typename T, typename U>
 	T factorial(U n)
 	{
+		if (n == 0)
+			return 1;
+
 		T fac = n;
 
 		while (n > 1) {
