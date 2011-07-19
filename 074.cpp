@@ -1,5 +1,7 @@
 #include <iostream>
-#include <set>
+#include <vector>
+#include <map>
+#include <algorithm>
 #include <cstdint>
 #include "euler.hpp"
 
@@ -21,17 +23,23 @@ int main(void)
 {
 	uint32_t num, sum;
 	uint32_t count = 0;
-	std::set<uint32_t> chain;
+	std::vector<uint32_t> chain;
+	std::map<uint32_t,uint8_t> cache;
+	uint8_t size;
 
 	for (num = 1; num < 1000000; num++) {
 		chain.clear();
-		chain.insert(num);
+		chain.push_back(num);
 		sum = digit_factorial_sum(num);
-		while (chain.find(sum) == chain.end()) {
-			chain.insert(sum);
+		while (find(chain.begin(), chain.end(), sum) == chain.end()) {
+			if (cache[sum])
+				break;
+			chain.push_back(sum);
 			sum = digit_factorial_sum(sum);
 		}
-		if (chain.size() == 60)
+		size = chain.size() + cache[sum];
+		cache[num] = size;
+		if (size == 60)
 			count++;
 	}
 
