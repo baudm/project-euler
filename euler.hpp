@@ -1,4 +1,5 @@
 #include <vector>
+#include <map>
 #include <cmath>
 #include <cstdint>
 
@@ -161,7 +162,7 @@ namespace euler
 	}
 
 	template<typename T, typename U>
-	T pentagonal(U n)
+	inline T pentagonal(U n)
 	{
 		return n*(3*n - 1)/2;
 	}
@@ -171,31 +172,38 @@ namespace euler
 	 * based on the recurrence relation of p(n)
 	 */
 	template<typename T, typename U>
-	T _p(U n, std::vector<U> const& nums, std::vector<T>& cache)
+	T _p(U n, std::map<U,T>& cache)
 	{
 		if (n == 0)
 			return 1;
 
 		T c, count = 0;
-		U k, i, x;
+		U k, x, num;
+		uint8_t i;
 
-		for (i = 0; i < nums.size(); i++) {
-			if (nums[i] > n)
-				break;
-			x = n - nums[i];
-			// cache hit is more likely
-			if (cache[x]) {
-				c = cache[x];
-			} else {
-				c = _p(x, nums, cache);
-				cache[x] = c;
+		// generate generalized pentagonal numbers up to n
+		for (k = 1; ; k++) {
+			// for positive and negative k
+			for (i = 0; i < 2; i++) {
+				num = (i == 0) ? euler::pentagonal<U>(k) : euler::pentagonal<U>(-k);
+				if (num > n)
+					break;
+				x = n - num;
+				// cache hit is more likely
+				if (cache[x]) {
+					c = cache[x];
+				} else {
+					c = _p(x, cache);
+					cache[x] = c;
+				}
+				// even: negative, odd: positive
+				if (k % 2 == 0)
+					count -= c;
+				else
+					count += c;
 			}
-			k = i/2 + 1;
-			// even: negative sign
-			if (k % 2 == 0)
-				count -= c;
-			else
-				count += c;
+			if (num > n)
+				break;
 		}
 
 		return count;
@@ -203,30 +211,19 @@ namespace euler
 
 	/**
 	 * Interface to the partition function p(n)
-	 * This function is responsible for generating the generalized pentagonal
-	 * numbers to be used later and for allocating the cache for memoization
+	 * This is used if the cache is not provided.
 	 */
 	template<typename T, typename U>
 	T p(U n)
 	{
-		std::vector<U> pent_nums;
-		std::vector<T> cache(n, 0); // cache for memoization
-		U num, k;
+		std::map<U,T> cache; // cache for memoization
 
-		// generate generalized pentagonal numbers up to n
-		for (k = 1; ; k++) {
-			// positive k
-			num = euler::pentagonal<U>(k);
-			if (num > n)
-				break;
-			pent_nums.push_back(num);
-			// negative k
-			num = euler::pentagonal<U>(-k);
-			if (num > n)
-				break;
-			pent_nums.push_back(num);
-		}
+		return _p<T>(n, cache);
+	}
 
-		return _p<T>(n, pent_nums, cache);
+	template<typename T, typename U>
+	inline T p(U n, std::map<U,T>& cache)
+	{
+		return _p<T>(n, cache);
 	}
 }
