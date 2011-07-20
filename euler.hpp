@@ -165,6 +165,12 @@ namespace euler
 	}
 
 	template<typename T, typename U>
+	inline T triangular(U n)
+	{
+		return n*(n + 1)/2;
+	}
+
+	template<typename T, typename U>
 	inline T pentagonal(U n)
 	{
 		return n*(3*n - 1)/2;
