@@ -22,23 +22,19 @@ def octagon(n):
 def find_cycle(cycle, pool):
 	used, chain = zip(*cycle)
 	end = chain[-1][2:]
-	foo = filter(lambda k: k not in used, pool.keys())
+	figures = filter(lambda k: k not in used, pool.keys())
 	cycles = []
-	for s in foo:
-		matches = filter(lambda x: x.startswith(end), pool[s])
+	for f in figures:
+		matches = filter(lambda x: x.startswith(end), pool[f])
 		for m in matches:
 			cycle_here = copy.copy(cycle)
-			cycle_here.append((s, m))
-			#print cycle_here
+			cycle_here.append((f, m))
 			cycles.append(find_cycle(cycle_here, pool))
 	if cycles:
-		lengths = map(len, cycles)
-		i = lengths.index(max(lengths))
-		c = cycles[i]
-		if len(c) == 6 and c[0][1].startswith(c[-1][1][2:]):
-			print sum(map(int, zip(*c)[1]))
-		# longest cycle
-		return c
+		for c in cycles:
+			if len(c) == 6 and c[0][1].startswith(c[-1][1][2:]):
+				return c
+		return cycle
 	else:
 		return cycle
 
@@ -50,11 +46,10 @@ def main():
 		pool[func.__name__] = map(str, filter(lambda x: 1000 <= x <= 9999, d))
 	for num in pool['octagon']:
 		start = [('octagon', num)]
-		c = find_cycle(start, pool)
+		cycle = find_cycle(start, pool)
+		if len(cycle) == 6:
+			print sum(map(int, zip(*cycle)[1]))
 
-		#if len(c) == 6: print c, c[0], c[-1]
-		#if len(c) == 6 and c[0][1].startswith(c[-1][1][2:]):
-		#	print c
 
 if __name__ == '__main__':
 	main()
