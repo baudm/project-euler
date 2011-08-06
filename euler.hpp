@@ -1,3 +1,4 @@
+#include <string>
 #include <vector>
 #include <map>
 #include <cmath>
@@ -234,5 +235,49 @@ namespace euler
 	inline T p(U n, std::map<U,T>& cache)
 	{
 		return _p<T>(n, cache);
+	}
+
+	template<typename T, typename Iterator>
+	T roman_to_int(Iterator start, Iterator end)
+	{
+		static std::map<char,T> numerals = {
+			{'I', 1}, {'V', 5}, {'X', 10}, {'L', 50},
+			{'C', 100}, {'D', 500}, {'M', 1000}
+		};
+		T value = 0;
+		T curr, prev = 0;
+
+		do {
+			curr = numerals[*start++];
+			value += curr;
+			if (curr > prev)
+				value -= 2*prev;
+			prev = curr;
+		} while (start != end);
+
+		return value;
+	}
+
+	template<typename T>
+	std::string int_to_roman(T value)
+	{
+		static std::map<T,char> numerals = {
+			{1, 'I'}, {5, 'V'}, {10, 'X'}, {50, 'L'},
+			{100, 'C'}, {500, 'D'}, {1000, 'M'}
+		};
+		typename std::map<T,char>::reverse_iterator rit;
+		std::string out;
+
+		while (value) {
+			for (rit = numerals.rbegin(); rit != numerals.rend(); ++rit) {
+				if (value >= rit->first) {
+					value -= rit->first;
+					out += rit->second;
+					break;
+				}
+			}
+		}
+
+		return out;
 	}
 }
