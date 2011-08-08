@@ -36,7 +36,7 @@ int main(void)
 						for (digits[11] = 0; digits[11] <= 9; digits[11]++) {
 							for (digits[13] = 0; digits[13] <= 9; digits[13]++) {
 								for (digits[15] = 0; digits[15] <= 8; digits[15] += 4) {
-									square = euler::digits2int<uint64_t>(10, digits, digits + DIGIT_MAX);
+									square = euler::digits_to_int<uint64_t>(10, digits, digits + DIGIT_MAX);
 									root = std::round(std::sqrt(square));
 									if (root*root == square)
 										goto done; // I'm lazy

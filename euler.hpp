@@ -155,7 +155,7 @@ namespace euler
 	}
 
 	template<typename T, typename U, typename Iterator>
-	T digits2int(U base, Iterator start, Iterator end)
+	T digits_to_int(U base, Iterator start, Iterator end)
 	{
 		T value = *start++;
 

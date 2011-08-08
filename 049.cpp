@@ -27,7 +27,7 @@ int main(void)
 			continue;
 		get_digits(digits, p);
 		while (std::next_permutation(digits, digits + 4)) {
-			next = euler::digits2int<uint16_t>(10, digits, digits + 4);
+			next = euler::digits_to_int<uint16_t>(10, digits, digits + 4);
 			if (euler::is_prime(next)) {
 				diff = next - p;
 				next += diff;
