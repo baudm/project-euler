@@ -165,6 +165,23 @@ namespace euler
 		return value;
 	}
 
+	template<typename T, typename U, typename Iterator>
+	void int_to_digits(T num, U base, Iterator start, Iterator end)
+	{
+		/**
+		 * Shift the start and end iterators to the left so that
+		 * the value of the start iterator becomes invalid while
+		 * the value of the end iterator becomes valid.
+		 */
+		--start;
+		--end;
+		while (end != start && num) {
+			*end = num % base;
+			num /= base;
+			--end;
+		}
+	}
+
 	template<typename T, typename U>
 	inline T triangular(U n)
 	{

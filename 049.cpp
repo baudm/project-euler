@@ -3,18 +3,6 @@
 #include <cstdint>
 #include "euler.hpp"
 
-
-void get_digits(uint8_t digits[], uint16_t num)
-{
-	uint8_t i = 3;
-
-	while (num) {
-		digits[i--] = num % 10;
-		num /= 10;
-	}
-}
-
-
 int main(void)
 {
 	uint16_t p, diff, next;
@@ -25,7 +13,7 @@ int main(void)
 		// skip non-primes and the given
 		if (!euler::is_prime(p) || p == 1487)
 			continue;
-		get_digits(digits, p);
+		euler::int_to_digits(p, 10, digits, digits + 4);
 		while (std::next_permutation(digits, digits + 4)) {
 			next = euler::digits_to_int<uint16_t>(10, digits, digits + 4);
 			if (euler::is_prime(next)) {
