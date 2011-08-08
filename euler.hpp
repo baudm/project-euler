@@ -199,11 +199,12 @@ namespace euler
 	 * based on the recurrence relation of p(n)
 	 */
 	template<typename T, typename U>
-	T _p(U n, std::map<U,T>& cache)
+	T p(U n)
 	{
 		if (n == 0)
 			return 1;
 
+		static std::map<U,T> cache; // cache for memoization
 		T c, count = 0;
 		U k, x, num;
 		uint8_t i;
@@ -220,7 +221,7 @@ namespace euler
 				if (cache[x]) {
 					c = cache[x];
 				} else {
-					c = _p(x, cache);
+					c = p<T>(x);
 					cache[x] = c;
 				}
 				// even: negative, odd: positive
@@ -234,24 +235,6 @@ namespace euler
 		}
 
 		return count;
-	}
-
-	/**
-	 * Interface to the partition function p(n)
-	 * This is used if the cache is not provided.
-	 */
-	template<typename T, typename U>
-	T p(U n)
-	{
-		std::map<U,T> cache; // cache for memoization
-
-		return _p<T>(n, cache);
-	}
-
-	template<typename T, typename U>
-	inline T p(U n, std::map<U,T>& cache)
-	{
-		return _p<T>(n, cache);
 	}
 
 	template<typename T, typename Iterator>
