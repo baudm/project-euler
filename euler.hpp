@@ -282,4 +282,34 @@ namespace euler
 
 		return out;
 	}
+
+	template<typename T>
+	bool is_permutation(T a, T b)
+	{
+		uint8_t count[10] = {0};
+		uint8_t digit, i;
+		T *nums[] = {&a, &b};
+
+		/**
+		 * For both numbers, count how many times each digit is used.
+		 */
+		for (i = 0; i < 2; i++) {
+			while (*nums[i]) {
+				digit = *nums[i] % 10;
+				count[digit]++;
+				*nums[i] /= 10;
+			}
+		}
+
+		/**
+		 * If a and b are permutations of each other, the count for each digit
+		 * should be even.
+		 */
+		for (i = 0; i < 10; i++) {
+			if (count[i] % 2 != 0)
+				return false;
+		}
+
+		return true;
+	}
 }
