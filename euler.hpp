@@ -165,6 +165,23 @@ namespace euler
 		return value;
 	}
 
+	template<typename T, typename U, typename Iterator>
+	void int_to_digits(T num, U base, Iterator start, Iterator end)
+	{
+		/**
+		 * Shift the start and end iterators to the left so that
+		 * the value of the start iterator becomes invalid while
+		 * the value of the end iterator becomes valid.
+		 */
+		--start;
+		--end;
+		while (end != start && num) {
+			*end = num % base;
+			num /= base;
+			--end;
+		}
+	}
+
 	template<typename T, typename U>
 	inline T triangular(U n)
 	{
@@ -182,11 +199,12 @@ namespace euler
 	 * based on the recurrence relation of p(n)
 	 */
 	template<typename T, typename U>
-	T _p(U n, std::map<U,T>& cache)
+	T p(U n)
 	{
 		if (n == 0)
 			return 1;
 
+		static std::map<U,T> cache; // cache for memoization
 		T c, count = 0;
 		U k, x, num;
 		uint8_t i;
@@ -203,7 +221,7 @@ namespace euler
 				if (cache[x]) {
 					c = cache[x];
 				} else {
-					c = _p(x, cache);
+					c = p<T>(x);
 					cache[x] = c;
 				}
 				// even: negative, odd: positive
@@ -217,24 +235,6 @@ namespace euler
 		}
 
 		return count;
-	}
-
-	/**
-	 * Interface to the partition function p(n)
-	 * This is used if the cache is not provided.
-	 */
-	template<typename T, typename U>
-	T p(U n)
-	{
-		std::map<U,T> cache; // cache for memoization
-
-		return _p<T>(n, cache);
-	}
-
-	template<typename T, typename U>
-	inline T p(U n, std::map<U,T>& cache)
-	{
-		return _p<T>(n, cache);
 	}
 
 	template<typename T, typename Iterator>
@@ -286,9 +286,9 @@ namespace euler
 	template<typename T>
 	bool is_permutation(T a, T b)
 	{
-		uint8_t count[10] = {0};
-		uint8_t digit, i;
+		uint8_t count[2][10] = {}; // initialize all to zero
 		T *nums[] = {&a, &b};
+		uint8_t digit, i;
 
 		/**
 		 * For both numbers, count how many times each digit is used.
@@ -296,17 +296,17 @@ namespace euler
 		for (i = 0; i < 2; i++) {
 			while (*nums[i]) {
 				digit = *nums[i] % 10;
-				count[digit]++;
+				count[i][digit]++;
 				*nums[i] /= 10;
 			}
 		}
 
 		/**
 		 * If a and b are permutations of each other, the count for each digit
-		 * should be even.
+		 * should be the same.
 		 */
 		for (i = 0; i < 10; i++) {
-			if (count[i] % 2 != 0)
+			if (count[0][i] != count[1][i])
 				return false;
 		}
 
