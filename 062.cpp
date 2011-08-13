@@ -1,58 +1,50 @@
 #include <iostream>
-#include <algorithm>
-#include <deque>
+#include <vector>
 #include <cstdint>
 #include "euler.hpp"
 
-
-void get_digits(uint64_t num, std::deque<uint8_t>& digits)
-{
-	digits.clear();
-	while (num) {
-		digits.push_front(num % 10);
-		num /= 10;
-	}
-}
-
-bool is_cube(uint64_t num)
-{
-	uint64_t root = std::round(std::cbrt(num));
-	return root*root*root == num;
-}
-
-
 int main(void)
 {
-	uint64_t i;
-	uint64_t cube, perm;
-	std::deque<uint8_t> digits;
-	std::deque<uint64_t> cubes;
+	uint64_t cube, target_cube = 0;
+	std::vector<uint64_t> cubes;
+	std::vector<uint64_t>::size_type j;
 
-	for (i = 5026; ; i++) {
-		cube = i*i*i;
-		get_digits(cube, digits);
+	uint64_t i = 5;
+	uint64_t limit = 1000;
+
+	while (true) {
+		/**
+		 * Generate cubes up to limit
+		 */
 		cubes.clear();
-		// start from lowest permutation
-		std::sort(digits.begin(), digits.end());
+		for (; ; i++) {
+			cube = i*i*i;
+			if (cube >= limit)
+				break;
+			cubes.push_back(cube);
+		}
 
-		do {
-			// skip permutations with leading zeroes
-			if (digits.front() == 0)
-				continue;
+		for (j = 0; j < cubes.size(); j++) {
+			std::vector<uint64_t>::size_type k;
+			uint8_t perms = 0;
 
-			perm = euler::digits_to_int<uint64_t>(10, digits.begin(), digits.end());
+			for (k = 0; k < cubes.size(); k++) {
+				if (euler::is_permutation(cubes[j], cubes[k]))
+					perms++;
+			}
+			if (perms == 5) {
+				target_cube = cubes[j];
+				break;
+			}
+		}
 
-			if (is_cube(perm))
-				cubes.push_back(perm);
-
-		} while (std::next_permutation(digits.begin(), digits.end()));
-
-		if (cubes.size() == 5)
+		if (target_cube)
 			break;
+
+		limit *= 10;
 	}
 
-	std::sort(cubes.begin(), cubes.end());
-	std::cout << cubes.front() << std::endl;
+	std::cout << target_cube << std::endl;
 
 	return 0;
 }
